@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ablat.dao.EmployeeMapper">
+    <resultMap id="employee" type="com.ablat.bean.Employee">
+        <id property="employeeId" column="emp_id"/>
+        <result column="emp_name" property="employeeName"/>
+        <result property="employeeEmail" column="emp_email"/>
+        <result property="employeeGender" column="emp_gender"/>
+    </resultMap>
+
+    <sql id="employeeColumns">
+        emp_id,emp_name,emp_email,emp_gender
+    </sql>
+
+    <select id="queryAllEmployees" resultMap="employee">
+      SELECT <include refid="employeeColumns"/> FROM emp
+    </select>
+
+    <insert id="insert">
+      INSERT INTO emp(<include refid="employeeColumns"/>) VALUES (
+          NULL ,'ablat','1024','m'
+        )
+    </insert>
+
+
+</mapper>
